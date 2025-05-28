@@ -1,0 +1,228 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Pacotes:
+\usepackage[
+    ignoreheadfoot, % define margens sem considerar cabeçalho e rodapé
+    top=1 cm, % separação entre o corpo e a borda superior da página
+    bottom=1 cm, % separação entre o corpo e a borda inferior da página
+    left=1 cm, % separação entre o corpo e a borda esquerda da página
+    right=1 cm, % separação entre o corpo e a borda direita da página
+    footskip=1 cm, % separação entre o corpo e o rodapé
+    % showframe % para depuração
+]{geometry} % para ajustar a geometria da página
+\usepackage{titlesec} % para personalizar títulos de seções
+\usepackage[dvipsnames]{xcolor} % para colorir texto
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define a cor primária
+\usepackage{enumitem} % para personalizar listas
+\usepackage{etoolbox} % para declarações condicionais
+\usepackage{amsmath} % para matemática
+\usepackage[
+    pdftitle={Curriculo de Victor Micco},
+    pdfauthor={Victor Micco},
+    pdfcreator={Victor Micco},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % para links, metadados e marcadores
+\usepackage[pscoord]{eso-pic} % para texto flutuante na página
+\usepackage{calc} % para calcular comprimentos
+\usepackage{bookmark} % para marcadores
+\usepackage{lastpage} % para obter o número total de páginas
+\usepackage{changepage} % para entradas de uma coluna (ambiente adjustwidth)
+\usepackage{paracol} % para entradas de duas e três colunas
+\usepackage{needspace} % para evitar quebra de página logo após o título da seção
+\usepackage{iftex} % verifica se o motor é pdflatex, xetex ou luatex
+
+% Garantir que o PDF gerado seja legível por máquinas/ATS:
+\ifPDFTeX
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Algumas configurações:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove espaço antes do ambiente adjustwidth
+\pagestyle{empty} % sem cabeçalho ou rodapé
+\setcounter{secnumdepth}{0} % sem numeração de seções
+\setlength{\parindent}{0pt} % sem indentação
+\setlength{\topskip}{0pt} % sem espaço no topo
+\setlength{\columnsep}{0.15cm} % define separação entre colunas
+\pagenumbering{gobble} % sem numeração de páginas
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[
+\vspace{1pt}
+\titlerule]
+
+\titlespacing{\section}{
+% espaço à esquerda:
+-1pt }{
+% espaço acima:
+0.3 cm }{
+% espaço abaixo:
+0.2 cm } % espaçamento do título da seção
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\small$\bullet$}}$} % pontos personalizados
+\newenvironment{highlights}{ \begin{itemize}[ topsep=0.10 cm, parsep=0.10 cm, partopsep=0pt,
+itemsep=0pt, leftmargin=0 cm + 10pt ] }{ \end{itemize} } % novo ambiente para destaques
+
+\newenvironment{highlightsforbulletentries}{ \begin{itemize}[ topsep=0.10 cm,
+parsep=0.10 cm, partopsep=0pt, itemsep=0pt, leftmargin=10pt ] }{ \end{itemize} } % novo ambiente para destaques para entradas com marcadores
+
+\newenvironment{onecolentry}{ \begin{adjustwidth}{ 0 cm + 0.00001 cm }{ 0 cm + 0.00001 cm }
+}{ \end{adjustwidth} } % novo ambiente para entradas de uma coluna
+
+\newenvironment{twocolentry}[2][]{ \onecolentry \def\secondColumn{#2} \setcolumnwidth{\fill, 4.5 cm}
+\begin{paracol}{2} }{ \switchcolumn \raggedleft \secondColumn \end{paracol}
+\endonecolentry } % novo ambiente para entradas de duas colunas
+
+\newenvironment{threecolentry}[3][]{ \onecolentry \def\thirdColumn{#3} \setcolumnwidth{, \fill, 4.5 cm}
+\begin{paracol}{3} {\raggedright #2} \switchcolumn }{ \switchcolumn \raggedleft \thirdColumn
+\end{paracol} \endonecolentry } % novo ambiente para entradas de três colunas
+
+\newenvironment{header}{
+\setlength{\topsep}{0pt}
+\par\kern\topsep
+\centering
+\linespread{1.5} }{ \par\kern\topsep } % novo ambiente para o cabeçalho
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<posição horizontal>}{<posição vertical>}{<conteúdo>}
+\AddToShipoutPictureFG*{% Adiciona <conteúdo> ao primeiro plano da página atual
+\put( \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm}, \LenToUnit{\paperheight-1.0 cm} ){\vtop{{\null}\makebox[0pt][c]{ \small\color{gray}\textit{Última atualização em setembro de 2024}\hspace{\widthof{Última atualização em setembro de 2024}} }}}%
+}%
+}%
+
+% salva o comando href original em um novo comando:
+\let\hrefWithoutArrow\href
+
+% novo comando para links externos:
+
+\begin{document}
+    \newcommand{\AND}{\unskip \cleaders\copy\ANDbox\hskip\wd\ANDbox \ignorespaces }
+    \newsavebox{\ANDbox}
+    \sbox{\ANDbox}{$|$}
+
+    \begin{header}
+        \fontsize{25 pt}{25 pt}\selectfont Victor Micco
+
+        \fontsize{18 pt}{18 pt}\selectfont Desenvolvedor Full Stack
+
+        \vspace{5 pt}
+
+        \normalsize
+        \mbox{\hrefWithoutArrow{mailto:victor.oficial093@gmail.com}{victor.oficial093@gmail.com}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://victormicco.com.br}{victormicco.com.br}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/victormicco}{linkedin.com/in/victormicco}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/victormicco}{github.com/victormicco}}%
+    \end{header}
+
+    \section{Habilidades}
+
+    Java, JavaScript (ES2015+), TypeScript,
+    SQL, GraphQL, React, Next.js, Vite,
+    Node.js, Tailwind CSS, Styled Components, Framer
+    Motion, Electron, Jest, Vitest, Cypress, Playwright,
+    Harbor, Apigee, Azure, CI/CD, SCRUM, Google Cloud,
+    Pipelines, Backstage, Turbo, Testes Unitários, Testes de Integração,
+    Testes End-to-End, Testes de API, Web
+    Spring Boot, Express, Fastify, Nest.js, React Native,
+    Expo, Git, GitHub, Figma, Netlify, Vercel, Heroku,
+    Storybook, Docker, Webpack, Babel, esbuild, swc,
+    Jira, Trello, Monday, Notion, Slack, Discord
+    
+    \section{Experiência}
+    
+    \begin{twocolentry}
+        { Setembro 2024 - Atual } \textbf{Desenvolvedor Full Stack}, {\hrefWithoutArrow{https://www.hp.com/us-en/home.html}{HP inc - Palo Alto, Califórnia}}.
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Desenvolvimento e manutenção do portal hp.dev, entregando lançamentos semanais com uma equipe de alto nível de engenheiros full stack, arquitetos, PMO's, PO's e QA's. React, Vite, GraphQL, Backstage, Express, NodeJS
+            \item Contribuição para a cobertura de testes unitários, e a cobertura de testes de integração no último trimestre de 2024 aumentando em 87\% - React Testing Library, Jest.
+            \item Arquitetura, desenvolvimento, manutenção e deploy do Apigee X Integration. Uma aplicação que permite o auto-gerenciamento de certificados, gerenciamento de acesso de usuários, lista de permissões de IP, keystores TLS, referências, servidores de destino, etc.
+            \item Trabalhei no projeto ApiM, uma nova plataforma de gerenciamento de APIs para a HP, utilizando Apigee, Harbor, Azure, Java, Spring Boot, Docker, Arquitetura Limpa, SOLID.
+            \item Desenvolvi um novo pipeline para implantar servidores-alvo no Apigee apenas carregando um arquivo JSON, reduzindo o tempo de implantação de novas APIs.
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}
+        { Maio 2024 - Agosto 2024 } \textbf{Desenvolvedor Full Stack},  {\hrefWithoutArrow{https://comhub.com.br/}{COMHUB - Lapa, São Paulo}}.
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Responsável pela arquitetura, desenvolvimento, testes e entrega de um iFrame com IA para gerar resumos de conversas conectadas ao WhatsApp para agentes de suporte no maior sistema contábil do Brasil, resultando em mais de 50.000 novos assinantes para este projeto. - NextJS | Fastify | Vitest | MySQL | Prisma | SOLID | Arquitetura Limpa | TailwindCSS | Axios | OpenAI API | Swagger | TypeScript | Docker | CI/CD | SCRUM
+            \item Criação do front-end para um Hub Contábil para gerenciar arquivos de contadores em todo o Brasil, consistindo em um sistema Admin e Cliente usando NextJS | TypeScript | ZOD | React Query | Zustand | Ky | Tailwind | Shadcn | Next Auth | Código Limpo | CI/CD
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}
+        { Outubro 2023 - Maio 2024 } \textbf{Desenvolvedor Full Stack}, {\hrefWithoutArrow{https://anjunexpress.com.br/}{ANJUN EXPRESS - Perus, São Paulo}}.
+    \end{twocolentry}
+    
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Coordenei o desenvolvimento de um software de emissão de documentos que gerou mais de 20 milhões de dólares em receita para a empresa e regularizou suas atividades no Brasil, utilizando NextJS | React | TypeScript | Tailwind | Jest | CI/CD | Git
+            \item Contribuí para uma biblioteca interna de componentes de interface de usuário que aumentou a produtividade em aproximadamente 40\% para todos os desenvolvimentos envolvendo interfaces de usuário, utilizando Shadcn | TypeScript | Storybook | Tailwind | Git.
+        \end{highlights}
+    \end{onecolentry}
+    
+    \vspace{0.2 cm}
+    
+    \begin{twocolentry}
+        { Maio 2022 - Outubro 2023 } \textbf{Desenvolvedor de Mecatrônica}, {\hrefWithoutArrow{https://anjunexpress.com.br/}{Metrô de São Paulo}}.
+        \vspace{0.10 cm}
+    \begin{onecolentry}
+        \begin{highlights}
+           \item Desenvolvimento de sistemas de controle e automação para o Metrô de São Paulo, utilizando C++ | Python | PLC | Arduino | Raspberry Pi | CNC | Robótica | Eletroeletrônica | Mecânica.
+           
+        \end{highlights}
+    \end{onecolentry}
+    \end{twocolentry}
+    
+    \begin{twocolentry}
+        { Janeiro 2020 - Março 2022 } \textbf{Desenvolvedor de Software}, 2LT Engineering
+    \end{twocolentry}
+    
+    
+    \section{Educação}
+    
+    \begin{twocolentry}
+        {2025 - 2029} \textbf{UNICESUMAR}, Engenharia de Software - Bacharelado
+    \end{twocolentry}
+    
+    \begin{twocolentry}
+        {2020 -  2023} \textbf{ETEC Parque Belem}, Desenvolvimento de Software - Técnico
+    \end{twocolentry}
+    
+    \section{Idiomas}
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Inglês (C1)
+            \item Português (Nativo)
+            \item Espanhol (B2)
+        \end{highlights}
+    \end{onecolentry}
+    
+\end{document}
